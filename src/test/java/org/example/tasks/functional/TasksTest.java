@@ -78,4 +78,22 @@ public class TasksTest {
             driver.quit();
         }
     }
+
+    @Test
+    public void deveRemoverTarefaComSucesso(){
+        WebDriver driver = acessarAplicacao();
+        try {
+            driver.findElement(By.id("addTodo")).click();
+            driver.findElement(By.id("task")).sendKeys("Teste via selenium para remoção");
+            driver.findElement(By.id("dueDate")).sendKeys("10/10/2095");
+            driver.findElement(By.id("saveButton")).click();
+            String message = driver.findElement(By.id("message")).getText();
+            Assert.assertEquals("Success!", message);
+
+            driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+            Assert.assertEquals("Success!", message);
+        } finally {
+            driver.quit();
+        }
+    }
 }
